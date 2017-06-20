@@ -1,7 +1,7 @@
   <div id="easy_wbs" class="<%= defined?(EasyExtensions) ? 'easy' : 'redmine' %>
     wbs clear">
 
-    <%= render @query, :easy_query_name => l(:heading_easy_wbs_issues), :wrapper_class => '', :options => { :show_custom_formatting => false, :show_free_search => false } %>
+    <%= render @query, :easy_query_name => l(:heading_easy_wbs_issues), :wrapper_class => '', :options => { :show_custom_formatting => true, :show_free_search => true } %>
     <div id="wbs_cont" class="clear">
       <div id="wbs_menu">
         <div class="menu-item legend-toggler">
