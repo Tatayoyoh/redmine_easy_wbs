@@ -79,6 +79,7 @@
       ysy.settings = {
         easyRedmine: <%= defined?(EasyExtensions)? true : false %>,
         projectID: <%= @project.id %>,
+        projectName: "<%= @project.identifier %>",
         apiKey: "<%= User.current.api_key %>",
         noSave: <%= params[:nosave] ? true : false %>,
         paths:{
@@ -89,7 +90,7 @@
           issuePUT: "<%= issue_path(':issueID', :format => 'json', :key => User.current.api_key) %>",
           issueDELETE: "<%= issue_path(':issueID', :format => 'json', :key => User.current.api_key) %>",
           projectPUT: "<%= project_path(':projectID', :format => 'json', :key => User.current.api_key) %>",
-          newIssuePath: '<%= new_issue_path(:key => User.current.api_key) %>',
+          newIssuePath: '<%= project_path(':projectName') %><%= new_issue_path(:key => User.current.api_key) %>',
           editIssuePath: '<%= edit_issue_path(':issueID',:key => User.current.api_key) %>'
         },
         labels:{

@@ -14,6 +14,7 @@ $.extend(ysy.view.modals, {
       idea = mapModel.findIdeaById(nodeId);
       preFill = $.extend(true,
           {project_id: ysy.settings.projectID},
+          {project_name: ysy.settings.projectName},
           ysy.mapModel.getData(idea),
           {subject: idea.title},
           ysy.mapModel.exportParent(idea, null, true)
@@ -72,11 +73,21 @@ $.extend(ysy.view.modals, {
       $target.dialog("close");
       return false;
     };
+    var parseUrl = function(url, preFillObj) {
+      if(preFillObj.id)
+        url = url.replace(":issueID", preFillObj.id);
+      if(preFillObj.project_id)
+        url = url.replace(":projectID", preFillObj.project_id);
+      if(preFillObj.project_name)
+        url = url.replace(":projectName", preFillObj.project_name);
+      return url;
+    };
     var openNewIssueModal = function () {
       //if (ysy.view.modals._cache["new_" + preFill.project_id]) {
       //  return finishModal("new", "issue", false);
       //}
-      ysy.gateway.polymorficGet(ysy.settings.paths.newIssuePath, {
+      
+      ysy.gateway.polymorficGet(parseUrl(ysy.settings.paths.newIssuePath, preFill), {
         projectID: preFill.project_id,
         issue: preFill
       }, function (data) {
@@ -90,8 +101,8 @@ $.extend(ysy.view.modals, {
       //if (ysy.view.modals._cache["edit_" + preFill.project_id]) {
       //  return finishModal("edit", "issue", false);
       //}
-      var path = ysy.settings.paths.editIssuePath.replace(":issueID", preFill.id);
-      ysy.gateway.polymorficGet(path, {
+
+      ysy.gateway.polymorficGet(parseUrl(ysy.settings.paths.editIssuePath, preFill), {
         projectID: preFill.project_id,
         issue: preFill
       }, function (data) {

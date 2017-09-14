@@ -3,8 +3,7 @@ ysy.gateway = ysy.gateway || {};
 $.extend(ysy.gateway, {
   polymorficGet: function (urlTemplate, obj, callback, fail) {
     if (!urlTemplate) return;
-    var url = urlTemplate.replace(":issueID",obj.issueID);
-    $.get(url, obj)
+    $.get(urlTemplate, obj)
         .done(callback)
         .fail(fail);
   },
