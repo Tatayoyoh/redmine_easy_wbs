@@ -22,6 +22,6 @@ $.extend(ysy.view, {
       }
     }
     //requestAnimFrame($.proxy(this.anim, this));
-    window.requestAnimFrame(view.anim);
+    window.requestAnimationFrame(view.anim);
   }
 });
